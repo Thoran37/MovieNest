@@ -56,9 +56,9 @@ mongodb.connect(process.env.DB_URL)
 
 
 // Handling page refresh
-// app.use((req, res, next) => {
-//   res.sendFile(path.join(__dirname, '../client/build/index.html'))
-// })
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
+})
 
 // Error handling
 app.use((err, req, res, next) => {
