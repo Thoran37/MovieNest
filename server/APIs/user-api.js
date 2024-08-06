@@ -13,9 +13,8 @@ const jwt = require('jsonwebtoken')
 const verifyToken = require('../middlewares/verifyToken')
 
 // Middleware to get the user object
-let userObj, articleObj;
+let userObj
 userApp.use((req, res, next) => {
-  articleObj = req.app.get('articles')
   userObj = req.app.get('users')
   next()
 })
@@ -50,6 +49,8 @@ userApp.post('/login', expressAsyncHandler(async (req, res) => {
     }
   }
 }))
+
+// Route to 
 
 // Export userApp
 module.exports = userApp

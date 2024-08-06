@@ -1,0 +1,16 @@
+POST http://localhost:4000/admin-api/login
+Content-Type: application/json
+
+{
+  "username":"admin",
+  "password":"admin123"
+}
+###
+
+POST http://localhost:4000/admin-api/add-user
+Content-Type: application/json
+
+{
+  "name":"Thoran",
+  "passw":"qwertyu"
+}

@@ -104,18 +104,19 @@ adminApp.post('/update-theatre', expressAsyncHandler(async (req, res) => {
 adminApp.post('/add-user', expressAsyncHandler(async (req, res) => {
   let body = req.body
   await userObj.insertOne(body)
-  res.send({ message: "New User added" })
+  let res1 = await userObj.findOne({ name: body.name })
+  res.send({ message: "New User added", payload: res1 })
 }))
 
 // Route to delete users
-adminApp.post('/remove-user/:id', expressAsyncHandler(async (req, res) => {
+adminApp.delete('/remove-user/:id', expressAsyncHandler(async (req, res) => {
   let id = req.params.id
   await userObj.deleteOne({ userId: id })
   res.send({ message: "User deleted" })
 }))
 
 // Route to update users
-adminApp.post('/update-user', expressAsyncHandler(async (req, res) => {
+adminApp.put('/update-user', expressAsyncHandler(async (req, res) => {
   let user = req.body
   await userObj.updateOne({ userId: user.userId }, { $set: { ...user } })
   let newuser = await userObj.findOne({ userId: user.userId })
