@@ -10,7 +10,7 @@ const bcryptjs = require('bcryptjs')
 
 // To generate dynamic web tokens
 const jwt = require('jsonwebtoken')
-const verifyToken = require('../Middlewares/verifyToken')
+const verifyToken = require('../middlewares/verifyToken')
 
 // Middleware to get the user object
 let userObj, articleObj;

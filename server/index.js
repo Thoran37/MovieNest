@@ -44,21 +44,35 @@ app.use('/assets', exp.static(path.join(__dirname, 'public/assets')));
 // Database connection
 mongodb.connect(process.env.DB_URL)
   .then(client => {
-    moviedb = client.db('moviedb')
+    const moviedb = client.db('moviedb')
+    const users = moviedb.collection('usercollection')
+    const admins = moviedb.collection('admincollection')
+    const theatres = moviedb.collection('theatrecollection')
+    const movies = moviedb.collection('moviescollection')
+    app.set('users', users)
+    app.set('admins', admins)
+    app.set('theatres', theatres)
+    app.set('movies', movies)
     console.log("DB connection established")
   })
   .catch(err => console.log("Error in DB", err))
 
 // Importing Apis
-
+const userApp = require('./APIs/user-api')
+const adminApp = require('./APIs/admin-api')
+const theatreApp = require('./APIs/theatre-api')
+const movieApp = require('./APIs/movie-api')
 
 // Sending requests to resp routes
-
+app.use('/user-api', userApp)
+app.use('/admin-api', adminApp)
+app.use('/theatre-api', theatreApp)
+app.use('/movie-api', movieApp)
 
 // Handling page refresh
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'))
-})
+// app.use((req, res, next) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'))
+// })
 
 // Error handling
 app.use((err, req, res, next) => {

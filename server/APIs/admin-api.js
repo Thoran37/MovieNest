@@ -10,15 +10,15 @@ const bcryptjs = require('bcryptjs')
 
 // To generate dynamic web tokens
 const jwt = require('jsonwebtoken')
-const verifyToken = require('../Middlewares/verifyToken')
+const verifyToken = require('../middlewares/verifyToken')
 
 // Middleware to get the admin object
-let adminObj, articleObj;
+let adminObj, userObj, movieObj, theatreObj;
 adminApp.use((req, res, next) => {
   adminObj = req.app.get('admins')
-  articleObj = req.app.get('articles')
-  authorObj = req.app.get('authors')
   userObj = req.app.get('users')
+  movieObj = req.app.get('movies')
+  theatreObj = req.app.get('theatres')
   next()
 })
 
@@ -53,24 +53,74 @@ adminApp.post('/register', expressAsyncHandler(async (req, res) => {
   }
 }))
 
-// Route to get all articles 
-adminApp.get('/articles', verifyToken, expressAsyncHandler(async (req, res) => {
-  const articlesList = await articleObj.find().toArray()
-  res.send({ message: "Articles List", payload: articlesList })
+// MOVIES
+// Route to add movies
+adminApp.post('/add-movie', expressAsyncHandler(async (req, res) => {
+  let body = req.body
+  await movieObj.insertOne(body)
+  res.send({ message: "New Movie added" })
 }))
 
-// Route to get all users
-adminApp.get('/users', verifyToken, expressAsyncHandler(async (req, res) => {
-  const usersList = await userObj.find().toArray()
-  res.send({ message: "Users List", payload: usersList })
+// Route to delete movies
+adminApp.post('/remove-movie/:id', expressAsyncHandler(async (req, res) => {
+  let id = req.params.id
+  await movieObj.deleteOne({ movieId: id })
+  res.send({ message: "Movie deleted" })
 }))
 
-// Route to get all authors
-adminApp.get('/authors', verifyToken, expressAsyncHandler(async (req, res) => {
-  const authorsList = await authorObj.find().toArray()
-  res.send({ message: "Authors List", payload: authorsList })
+// Route to update movies
+adminApp.post('/update-movie', expressAsyncHandler(async (req, res) => {
+  let movie = req.body
+  await movieObj.updateOne({ movieId: movie.movieId }, { $set: { ...movie } })
+  let newmovie = await movieObj.findOne({ movieId: movie.movieId })
+  res.send({ message: "Movie modified", payload: newmovie })
 }))
 
+// THEATRES
+// Route to add theatres
+adminApp.post('/add-theatre', expressAsyncHandler(async (req, res) => {
+  let body = req.body
+  await theatreObj.insertOne(body)
+  res.send({ message: "New Theatre added" })
+}))
+
+// Route to delete theatres
+adminApp.post('/remove-theatre/:id', expressAsyncHandler(async (req, res) => {
+  let id = req.params.id
+  await theatreObj.deleteOne({ theatreId: id })
+  res.send({ message: "Theatre deleted" })
+}))
+
+// Route to update theatres
+adminApp.post('/update-theatre', expressAsyncHandler(async (req, res) => {
+  let theatre = req.body
+  await theatreObj.updateOne({ theatreId: theatre.theatreId }, { $set: { ...theatre } })
+  let newtheatre = await theatreObj.findOne({ theatreId: theatre.theatreId })
+  res.send({ message: "theatre modified", payload: newtheatre })
+}))
+
+// USERS
+// Route to add users
+adminApp.post('/add-user', expressAsyncHandler(async (req, res) => {
+  let body = req.body
+  await userObj.insertOne(body)
+  res.send({ message: "New User added" })
+}))
+
+// Route to delete users
+adminApp.post('/remove-user/:id', expressAsyncHandler(async (req, res) => {
+  let id = req.params.id
+  await userObj.deleteOne({ userId: id })
+  res.send({ message: "User deleted" })
+}))
+
+// Route to update users
+adminApp.post('/update-user', expressAsyncHandler(async (req, res) => {
+  let user = req.body
+  await userObj.updateOne({ userId: user.userId }, { $set: { ...user } })
+  let newuser = await userObj.findOne({ userId: user.userId })
+  res.send({ message: "User modified", payload: newuser })
+}))
 
 // Export adminApp
 module.exports = adminApp
