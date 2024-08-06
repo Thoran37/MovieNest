@@ -25,9 +25,7 @@ adminApp.use((req, res, next) => {
 // Route to login
 adminApp.post('/login', expressAsyncHandler(async (req, res) => {
   const admin = req.body
-  //console.log(admin)
   const dbadmin = await adminObj.findOne({ username: admin.username })
-  //console.log(dbadmin)
   if (dbadmin === null)
     res.send({ message: "Invalid username" })
   else {
@@ -64,14 +62,14 @@ adminApp.post('/add-movie', expressAsyncHandler(async (req, res) => {
 }))
 
 // Route to delete movies
-adminApp.post('/remove-movie/:id', expressAsyncHandler(async (req, res) => {
+adminApp.delete('/remove-movie/:id', expressAsyncHandler(async (req, res) => {
   let id = req.params.id
   await movieObj.deleteOne({ movieId: id })
   res.send({ message: "Movie deleted" })
 }))
 
 // Route to update movies
-adminApp.post('/update-movie', expressAsyncHandler(async (req, res) => {
+adminApp.put('/update-movie', expressAsyncHandler(async (req, res) => {
   let movie = req.body
   await movieObj.updateOne({ movieId: movie.movieId }, { $set: { ...movie } })
   let newmovie = await movieObj.findOne({ movieId: movie.movieId })
@@ -87,14 +85,14 @@ adminApp.post('/add-theatre', expressAsyncHandler(async (req, res) => {
 }))
 
 // Route to delete theatres
-adminApp.post('/remove-theatre/:id', expressAsyncHandler(async (req, res) => {
+adminApp.delete('/remove-theatre/:id', expressAsyncHandler(async (req, res) => {
   let id = req.params.id
   await theatreObj.deleteOne({ theatreId: id })
   res.send({ message: "Theatre deleted" })
 }))
 
 // Route to update theatres
-adminApp.post('/update-theatre', expressAsyncHandler(async (req, res) => {
+adminApp.put('/update-theatre', expressAsyncHandler(async (req, res) => {
   let theatre = req.body
   await theatreObj.updateOne({ theatreId: theatre.theatreId }, { $set: { ...theatre } })
   let newtheatre = await theatreObj.findOne({ theatreId: theatre.theatreId })
@@ -104,9 +102,10 @@ adminApp.post('/update-theatre', expressAsyncHandler(async (req, res) => {
 // USERS
 // Route to add users
 adminApp.post('/add-user', expressAsyncHandler(async (req, res) => {
+  let body = req.body
   await userObj.insertOne(body)
   let res1 = await userObj.findOne({ name: body.name })
-  res.send({ message: "New User added", payload: res1, payload: res1 })
+  res.send({ message: "New User added", payload: res1 })
 }))
 
 // Route to delete users
