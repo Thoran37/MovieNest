@@ -1,0 +1,21 @@
+###User api requests
+###user register
+POST http://localhost:4000/user-api/register
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"user"
+}
+
+###user login
+POST http://localhost:4000/user-api/login
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"user"
+}
+
+###Get movies
+GET http://localhost:4000/user-api/get-movies

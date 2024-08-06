@@ -60,14 +60,10 @@ mongodb.connect(process.env.DB_URL)
 // Importing Apis
 const userApp = require('./APIs/user-api')
 const adminApp = require('./APIs/admin-api')
-const theatreApp = require('./APIs/theatre-api')
-const movieApp = require('./APIs/movie-api')
 
 // Sending requests to resp routes
 app.use('/user-api', userApp)
 app.use('/admin-api', adminApp)
-// app.use('/theatre-api', theatreApp)
-// app.use('/movie-api', movieApp)
 
 // Handling page refresh
 // app.use((req, res, next) => {

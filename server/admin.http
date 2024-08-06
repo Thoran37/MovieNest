@@ -22,8 +22,8 @@ POST http://localhost:4000/admin-api/add-movie
 Content-Type: application/json
 
 {
-    "movieId":"1",
-    "movieName":"Billa"
+    "movieId":"2",
+    "movieName":"Oye"
 }
 
 ###remove movie
