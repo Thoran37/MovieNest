@@ -25,7 +25,9 @@ adminApp.use((req, res, next) => {
 // Route to login
 adminApp.post('/login', expressAsyncHandler(async (req, res) => {
   const admin = req.body
+  //console.log(admin)
   const dbadmin = await adminObj.findOne({ username: admin.username })
+  //console.log(dbadmin)
   if (dbadmin === null)
     res.send({ message: "Invalid username" })
   else {
@@ -102,9 +104,9 @@ adminApp.post('/update-theatre', expressAsyncHandler(async (req, res) => {
 // USERS
 // Route to add users
 adminApp.post('/add-user', expressAsyncHandler(async (req, res) => {
-  let body = req.body
   await userObj.insertOne(body)
-  res.send({ message: "New User added" })
+  let res1 = await userObj.findOne({ name: body.name })
+  res.send({ message: "New User added", payload: res1 })
 }))
 
 // Route to delete users

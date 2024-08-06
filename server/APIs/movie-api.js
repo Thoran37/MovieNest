@@ -11,3 +11,6 @@ const bcryptjs = require('bcryptjs')
 // To generate dynamic web tokens
 const jwt = require('jsonwebtoken')
 const verifyToken = require('../middlewares/verifyToken')
+
+
+module.exports = movieApp
