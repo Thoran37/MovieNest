@@ -38,45 +38,31 @@ userApp.post(
 );
 
 // Route to login
-userApp.post(
-  "/login",
-  expressAsyncHandler(async (req, res) => {
-    const user = req.body;
-    const dbUser = await userObj.findOne({ username: user.username });
-    if (dbUser === null) res.send({ message: "Invalid username" });
+userApp.post("/login", expressAsyncHandler(async (req, res) => {
+  const user = req.body;
+  const dbUser = await userObj.findOne({ username: user.username });
+  if (dbUser === null)
+    res.send({ message: "Invalid username" });
+  else {
+    const status = await bcryptjs.compare(user.password, dbUser.password);
+    if (status === false)
+      res.send({ message: "Invalid password" });
     else {
-      const status = await bcryptjs.compare(user.password, dbUser.password);
-      if (status === false) res.send({ message: "Invalid password" });
-      else {
-        const signedToken = jwt.sign(
-          { username: dbUser.username },
-          process.env.SECRET_KEY,
-          { expiresIn: "1d" }
-        );
-        res.send({
-          message: "Login successful",
-          token: signedToken,
-          user: dbUser,
-        });
-      }
+      const signedToken = jwt.sign({ username: dbUser.username }, process.env.SECRET_KEY, { expiresIn: "1d" });
+      res.send({ message: "Login successful", token: signedToken, user: dbUser });
     }
-  })
-);
+  }
+}));
 
 // Route to get movies
-userApp.get(
-  "/get-movies",
-  expressAsyncHandler(async (req, res) => {
-    try {
-      const movies = await movieObj.find().toArray();
-      res.send({ message: "Movies retrieved successfully", payload: movies });
-    } catch (error) {
-      res
-        .status(500)
-        .send({ message: "Error retrieving movies", error: error.message });
-    }
-  })
-);
+userApp.get("/get-movies", expressAsyncHandler(async (req, res) => {
+  try {
+    const movies = await movieObj.find().toArray();
+    res.send({ message: "Movies retrieved successfully", payload: movies });
+  } catch (error) {
+    res.status(500).send({ message: "Error retrieving movies", error: error.message });
+  }
+}));
 
 // Export userApp
 module.exports = userApp;
