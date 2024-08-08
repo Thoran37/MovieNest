@@ -13,29 +13,29 @@ const jwt = require("jsonwebtoken");
 const verifyToken = require("../middlewares/verifyToken");
 
 // Middleware to get the user object
-let userObj;
+let userObj, movieObj, theatreObj, showsObj, reservationObj;
 userApp.use((req, res, next) => {
   userObj = req.app.get("users");
   movieObj = req.app.get("movies");
   theatreObj = req.app.get("theatres");
+  showsObj = req.app.get("shows")
+  reservationObj = req.app.get("reservations")
   next();
 });
 
 // Route to register
-userApp.post(
-  "/register",
-  expressAsyncHandler(async (req, res) => {
-    let body = req.body;
-    const dbUser = await userObj.findOne({ username: body.username });
-    if (dbUser !== null) res.send({ message: "User already exists" });
-    else {
-      const hash = await bcryptjs.hash(body.password, 7);
-      body.password = hash;
-      await userObj.insertOne(body);
-      res.send({ message: "User registered" });
-    }
-  })
-);
+userApp.post("/register", expressAsyncHandler(async (req, res) => {
+  let body = req.body;
+  const dbUser = await userObj.findOne({ username: body.username });
+  if (dbUser !== null)
+    res.send({ message: "User already exists" });
+  else {
+    const hash = await bcryptjs.hash(body.password, 7);
+    body.password = hash;
+    await userObj.insertOne(body);
+    res.send({ message: "User registered" });
+  }
+}));
 
 // Route to login
 userApp.post("/login", expressAsyncHandler(async (req, res) => {
@@ -55,14 +55,29 @@ userApp.post("/login", expressAsyncHandler(async (req, res) => {
 }));
 
 // Route to get movies
-userApp.get("/get-movies", expressAsyncHandler(async (req, res) => {
+userApp.get("/get-movies", verifyToken, expressAsyncHandler(async (req, res) => {
   try {
     const movies = await movieObj.find().toArray();
     res.send({ message: "Movies retrieved successfully", payload: movies });
-  } catch (error) {
-    res.status(500).send({ message: "Error retrieving movies", error: error.message });
+  } catch (err) {
+    res.status(500).send({ message: "Error retrieving movies", error: err.message });
   }
 }));
+
+// Route to get showtimes
+userApp.get("/get-shows/:title", verifyToken, expressAsyncHandler(async (req, res) => {
+  let name = req.params.title
+  const shows = await showsObj.find({ title: name }).toArray()
+  res.send({ message: "Showtimes are retrieved", payload: shows })
+}))
+
+// Route to book tickets
+userApp.post("/book-ticket", verifyToken, expressAsyncHandler(async (req, res) => {
+  let body = req.body
+  await reservationObj.insertOne(body)
+  let reserve = await reservationObj.findOne({ orderId: body.orderId })
+  res.send({ message: "Reservation confirmed", payload: reserve })
+}))
 
 // Export userApp
 module.exports = userApp;
