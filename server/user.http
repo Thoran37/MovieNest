@@ -18,7 +18,6 @@ Content-Type: application/json
 
 ###Get movies
 GET http://localhost:4000/user-api/get-movies
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpYXQiOjE3MjMxMjU2NzYsImV4cCI6MTcyMzIxMjA3Nn0.a61X1xHXtjNA1UkrkHJ8XM_F2zPkRFYs_MingqoQq5U
 
 ### Get showtimes
 GET http://localhost:4000/user-api/get-shows/Billa
