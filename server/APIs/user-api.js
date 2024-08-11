@@ -55,7 +55,7 @@ userApp.post("/login", expressAsyncHandler(async (req, res) => {
 }));
 
 // Route to get movies
-userApp.get("/get-movies", verifyToken, expressAsyncHandler(async (req, res) => {
+userApp.get("/get-movies", expressAsyncHandler(async (req, res) => {
   try {
     const movies = await movieObj.find().toArray();
     res.send({ message: "Movies retrieved successfully", payload: movies });
