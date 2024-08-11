@@ -3,6 +3,7 @@ import AdminDashboard from "./admin/AdminDashboard.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Dashboard from "./Dashboard.jsx";
 import Movies from "./admin/Movies.jsx";
+import Users from "./admin/Users.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
@@ -52,7 +53,7 @@ export default function App() {
         },
         {
           path: "users",
-          element: <Dashboard />,
+          element: <Users />,
         },
       ],
     },

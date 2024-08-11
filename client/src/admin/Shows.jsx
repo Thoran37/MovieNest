@@ -9,22 +9,22 @@ import {
 } from "@/components/ui/card";
 import axios from "axios";
 
-function Movies() {
-  let [movies, setMovies] = useState([]);
+function Shows() {
+  let [shows, setShows] = useState([]);
 
-  async function getMovies() {
-    let res = await axios.get("http://localhost:4000/user-api/get-movies");
-    setMovies(res.data.payload);
+  async function getShows() {
+    let res = await axios.get("http://localhost:4000/user-api/get-Shows");
+    setShows(res.data.payload);
   }
 
   useEffect(() => {
-    getMovies();
+    getShows();
   }, []);
 
   return (
     <div className="p-3 font-radio">
-      <h1 className="text-center text-4xl mb-6">MOVIES</h1>
-      {movies.map((movie) => (
+      <h1 className="text-center text-4xl mb-6">Shows</h1>
+      {shows.map((movie) => (
         <Card className="m-3">
           <CardHeader>
             <CardTitle>{movie.title}</CardTitle>
@@ -42,4 +42,4 @@ function Movies() {
   );
 }
 
-export default Movies;
+export default Shows;

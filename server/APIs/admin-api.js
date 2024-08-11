@@ -123,5 +123,11 @@ adminApp.put('/update-user', expressAsyncHandler(async (req, res) => {
   res.send({ message: "User modified", payload: newuser })
 }))
 
+// Route to get users
+adminApp.get('/get-users', expressAsyncHandler(async (req, res) => {
+  let users = await userObj.find().toArray()
+  res.send({ message: "Users list", payload: users })
+}))
+
 // Export adminApp
 module.exports = adminApp
