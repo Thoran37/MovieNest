@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken')
 const verifyToken = require('../middlewares/verifyToken')
 
 // Middleware to get the admin object
-let adminObj, userObj, movieObj, theatreObj;
+let adminObj, userObj, movieObj, theatreObj, showtimeObj;
 adminApp.use((req, res, next) => {
   adminObj = req.app.get('admins')
   userObj = req.app.get('users')
@@ -56,40 +56,7 @@ adminApp.post('/register', expressAsyncHandler(async (req, res) => {
 
 // MOVIES
 // Route to add movies
-adminApp.post('/add-movie', expressAsyncHandler(async (req, res) => {
-  let body = req.body;
-  let existingMovie = await movieObj.findOne({ title: body.title });
 
-  if (existingMovie) {
-    res.status(400).send({ message: "Movie already exists" });
-  } else {
-    // Add the movie to the movies collection
-    await movieObj.insertOne(body);
-
-    // Add the movie to the theatres collection
-    const theatres = await theatreObj.find({}).toArray(); 
-    const theatreUpdates = theatres.map(theatre => {
-      return theatreObj.updateOne(
-        { theatreId: theatre.theatreId },
-        { $push: { movies: body } } 
-      );
-    });
-    await Promise.all(theatreUpdates); 
-
-    // Add the movie to the shows collection (create a default showtime entry)
-    const showtime = {
-      movieId: body.movieId,
-      title: body.title,
-      theatres: theatres.map(theatre => ({
-        theatreId: theatre.theatreId,
-        showtimes: [] 
-      }))
-    };
-    await showtimeObj.insertOne(showtime);
-
-    res.send({ message: "New Movie added and linked to theatres and showtimes" });
-  }
-}));
 
 
 

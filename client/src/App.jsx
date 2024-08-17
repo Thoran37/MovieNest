@@ -1,8 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import AdminDashboard from "./admin/AdminDashboard.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Dashboard from "./Dashboard.jsx";
 import Movies from "./admin/Movies.jsx";
+import AddMovieForm from "./admin/AddMovieForm.jsx";
 import Users from "./admin/Users.jsx";
 
 export default function App() {
@@ -37,7 +38,17 @@ export default function App() {
       children: [
         {
           path: "movies",
-          element: <Movies />,
+          element: <Outlet />,
+          children: [
+            {
+              path: "",
+              element: <Movies />,
+            },
+            {
+              path: "add-movie",
+              element: <AddMovieForm />,
+            },
+          ],
         },
         {
           path: "bookings",
