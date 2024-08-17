@@ -10,14 +10,19 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useDispatch } from "react-redux";
+import { loginThunk } from "./redux/userSlice";
 
 export default function Login() {
-  let { register, handleSubmit } = useForm();
-
+  let {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  let dispatch = useDispatch();
   async function login(obj) {
-    console.log(obj);
+    dispatch(loginThunk(obj));
   }
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -29,23 +34,36 @@ export default function Login() {
         </DialogHeader>
         <form className="grid gap-4 py-4" onSubmit={handleSubmit(login)}>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label className="text-right">Username</Label>
-            <Input className="col-span-3" {...register("username")} />
+            <div>
+              {errors.username?.type === "required" && (
+                <p className="text-red-500 inline me-0.5">*</p>
+              )}
+              <Label>Username</Label>
+            </div>
+            <Input
+              className="col-span-3"
+              {...register("username", { required: true })}
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label className="text-right"> Password </Label>
+            <div>
+              {errors.username?.type === "required" && (
+                <p className="text-red-500 inline me-0.5">*</p>
+              )}
+              <Label>Password</Label>
+            </div>
             <Input
               type="password"
               className="col-span-3"
-              {...register("password")}
+              {...register("password", { required: true })}
             />
           </div>
           <DialogFooter>
-            <Button>Login with Google</Button>
             <Button>Login</Button>
-            <Button>Forgot Password?</Button>
           </DialogFooter>
         </form>
+        <Button>Login with Google</Button>
+        <Button>Forgot Password ?</Button>
       </DialogContent>
     </Dialog>
   );
