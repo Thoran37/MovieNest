@@ -8,12 +8,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import axios from "axios";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 function Movies() {
   let [movies, setMovies] = useState([]);
 
   async function getMovies() {
-    let res = await axios.get("http://localhost:4000/user-api/get-movies");
+    let res = await axios.get("http://localhost:4000/admin-api/get-movies");
     setMovies(res.data.payload);
   }
 
@@ -23,6 +25,9 @@ function Movies() {
 
   return (
     <div className="p-3 font-radio">
+      <Button className="absolute right-0 mr-6">
+        <Link to="add-movie">Add New</Link>
+      </Button>
       <h1 className="text-center text-4xl mb-6">MOVIES</h1>
       {movies.map((movie) => (
         <Card className="m-3">
