@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard.jsx";
 import Movies from "./admin/Movies.jsx";
 import AddMovieForm from "./admin/AddMovieForm.jsx";
 import Users from "./admin/Users.jsx";
+import Shows from "./admin/Shows.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
@@ -60,7 +61,7 @@ export default function App() {
         },
         {
           path: "shows",
-          element: <Dashboard />,
+          element: <Shows />,
         },
         {
           path: "users",

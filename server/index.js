@@ -59,7 +59,7 @@ const adminApp = require('./APIs/admin-api')
 
 // File Storage - Multer
 const multer = require('multer')
-const storage = multer.diskStorage({
+const storage1 = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/assets");
   },
@@ -67,7 +67,7 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-const upload = multer({ storage });
+const upload = multer({ storage: storage1 });
 
 // Routes with files
 app.post('/admin-api/add-movie', upload.single("img"), expressAsyncHandler(async (req, res) => {

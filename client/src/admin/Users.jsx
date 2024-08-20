@@ -28,13 +28,13 @@ function Users() {
         <Card className="m-3">
           <CardHeader>
             <CardTitle>{user.name}</CardTitle>
-            <CardDescription>{user.passw}</CardDescription>
           </CardHeader>
           <CardContent>
-            <p>Card Content</p>
+            <p>{user.email}</p>
+            <p>{user.phno}</p>
           </CardContent>
           <CardFooter className="border-t-2">
-            <p>Added on {user.release}</p>
+            <p>Registered on {user.date}</p>
           </CardFooter>
         </Card>
       ))}

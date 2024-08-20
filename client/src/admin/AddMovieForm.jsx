@@ -23,13 +23,17 @@ export default function AddMovieForm() {
 
   async function addMovie(movieObj) {
     movieObj.movieId = Date.now();
+    const keys = Object.keys(movieObj);
+    console.log(keys);
     const form = new FormData();
-    for (let i in movieObj) form.append(i, movieObj[i]);
-    form.append("picturePath", {
-      name: movieObj.img.name,
-      type: "image/png",
-    });
-    console.log(movieObj);
+    for (let i in movieObj) form.append(keys[i], movieObj[i]);
+    // form.append("picturePath", {
+    //   name: movieObj.img[0],
+    //   type: "image/png",
+    // });
+    // form.append("hello", movieObj.movieId);
+    // console.log(movieObj);
+    console.log(form.getAll());
     let res = await axios.post(
       "http://localhost:4000/admin-api/add-movie",
       movieObj
@@ -39,7 +43,7 @@ export default function AddMovieForm() {
       res.data.message ===
       "New Movie added and linked to theatres and showtimes"
     )
-      navigate("admin/movies");
+      navigate("/admin/movies");
     else setErr(res.data.payload);
   }
 

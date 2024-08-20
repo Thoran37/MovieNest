@@ -57,18 +57,18 @@ adminApp.post('/register', expressAsyncHandler(async (req, res) => {
 // MOVIES
 // Route to add movies
 
-
+// Went to index.js because we need to upload image - in testing
 
 
 // Route to delete movies
 adminApp.delete('/remove-movie/:id', expressAsyncHandler(async (req, res) => {
   let id = req.params.id;
-
+  console.log(id)
   const deleteResult = await movieObj.deleteOne({ movieId: id });
+  console.log(deleteResult)
 
-  if (deleteResult.deletedCount === 0) {
+  if (deleteResult.deletedCount === 0)
     return res.status(404).send({ message: "Movie not found" });
-  }
 
   await theatreObj.updateMany(
     { "movies.movieId": id },
