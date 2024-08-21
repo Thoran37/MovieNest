@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { GrLinkNext } from "react-icons/gr";
+import axios from "axios";
 
 export default function Shows() {
   let [movies, setMovies] = useState([]);
@@ -30,6 +31,7 @@ export default function Shows() {
       <TableCaption>A list of the running movies.</TableCaption>
       <TableHeader>
         <TableRow>
+          <TableHead></TableHead>
           <TableHead>Movie Name</TableHead>
           <TableHead>No.of Theatres</TableHead>
           <TableHead>No.of Shows</TableHead>
@@ -39,7 +41,10 @@ export default function Shows() {
       <TableBody>
         {movies.map((movie) => (
           <TableRow>
-            <TableCell className="font-medium">{movie.name}</TableCell>
+            <TableCell>
+              <img src={movie.img} />
+            </TableCell>
+            <TableCell className="font-bold">{movie.title}</TableCell>
             <TableCell>{movie.movieId}</TableCell>
             <TableCell>{movie.movieId}</TableCell>
             <TableCell className="text-right">

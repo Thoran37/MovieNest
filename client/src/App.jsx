@@ -6,6 +6,7 @@ import Movies from "./admin/Movies.jsx";
 import AddMovieForm from "./admin/AddMovieForm.jsx";
 import Users from "./admin/Users.jsx";
 import Shows from "./admin/Shows.jsx";
+import EachShow from "./admin/EachShow.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
@@ -57,7 +58,7 @@ export default function App() {
         },
         {
           path: "theatres",
-          element: <Dashboard />,
+          element: <EachShow />,
         },
         {
           path: "shows",
