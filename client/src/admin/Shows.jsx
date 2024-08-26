@@ -11,16 +11,18 @@ import {
 import { Button } from "@/components/ui/button";
 import { GrLinkNext } from "react-icons/gr";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Shows() {
   let [movies, setMovies] = useState([]);
+  let navigate = useNavigate();
 
   async function getMovies() {
     let res = await axios.get("http://localhost:4000/admin-api/get-movies");
     setMovies(res.data.payload);
   }
   async function gotoShow(id) {
-    console.log(id);
+    navigate(`/admin/shows/${id}`);
   }
   useEffect(() => {
     getMovies();

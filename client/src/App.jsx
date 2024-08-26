@@ -63,12 +63,10 @@ export default function App() {
         {
           path: "shows",
           element: <Shows />,
-          children: [
-            {
-              path: "moviename",
-              element: <EachShow />,
-            },
-          ],
+        },
+        {
+          path: "shows/:movieId",
+          element: <EachShow />,
         },
         {
           path: "users",
