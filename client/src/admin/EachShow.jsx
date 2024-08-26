@@ -39,7 +39,7 @@ export default function EachShow() {
       <div className="text-center bg-slate-500 grid grid-cols-7 py-1 divide-x">
         {dates.map((date, index) => (
           <div
-            onClick={() => shows(date)}
+            onClick={getNext7Days}
             className="flex flex-col cursor-pointer"
             key={index}
           >
