@@ -58,11 +58,17 @@ export default function App() {
         },
         {
           path: "theatres",
-          element: <EachShow />,
+          element: <Dashboard />,
         },
         {
           path: "shows",
           element: <Shows />,
+          children: [
+            {
+              path: "moviename",
+              element: <EachShow />,
+            },
+          ],
         },
         {
           path: "users",
