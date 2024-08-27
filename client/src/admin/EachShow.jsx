@@ -38,7 +38,7 @@ export default function EachShow() {
       dates.push({
         day: day.toString(),
         month: month,
-        date: ISOtoUTC(date),
+        date: date,
       });
     }
     return dates;
@@ -46,7 +46,7 @@ export default function EachShow() {
   const dates = getNext7Days();
 
   async function getShows(_date) {
-    const obj = { movieId: movieId, date: _date };
+    const obj = { id: movieId, date: _date };
     let res = await axios.post(
       "http://localhost:4000/admin-api/get-shows",
       obj

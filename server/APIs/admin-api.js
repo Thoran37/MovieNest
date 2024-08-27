@@ -209,9 +209,11 @@ adminApp.get('/get-users', expressAsyncHandler(async (req, res) => {
 }))
 
 // SHOWS
-// Route to get shows based on time and movie
+// Route to get shows based on time and movie - Working Fine
 adminApp.post('/get-shows', expressAsyncHandler(async (req, res) => {
-  let id = req.body.movieId, _date = req.body.date
+  const { id, date } = req.body
+  let _date = new Date(date)
+  _date = _date.toISOString().split('T')[0]
   let shows = await showtimeObj.find({ movieId: id, date: _date }).toArray()
   res.send({ message: "Shows list", payload: shows })
 }))
