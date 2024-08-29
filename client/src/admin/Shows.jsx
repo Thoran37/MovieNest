@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -29,7 +29,7 @@ export default function Shows() {
   }, []);
 
   return (
-    <Table className="bg-red-200 table-auto m-5 w-4/5 mx-auto">
+    <Table className="border table-auto m-5 w-4/5 mx-auto">
       <TableCaption>A list of the running movies.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -41,8 +41,8 @@ export default function Shows() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {movies.map((movie) => (
-          <TableRow>
+        {movies.map((movie, index) => (
+          <TableRow key={index}>
             <TableCell>
               <img src={movie.img} />
             </TableCell>
@@ -60,5 +60,4 @@ export default function Shows() {
       </TableBody>
     </Table>
   );
-  x;
 }

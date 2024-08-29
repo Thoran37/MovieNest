@@ -1,17 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function EachShow() {
   const { movieId } = useParams();
-  let [shows, setShows] = useState([]);
-
-  function ISOtoUTC(iso) {
-    let date = new Date(iso).getUTCDate();
-    let month = new Date(iso).getUTCMonth();
-    let year = new Date(iso).getUTCFullYear();
-    return `${year}-${month + 1}-${date}`;
-  }
+  const [shows, setShows] = useState([]);
+  const [selectedDate, setSelectedDate] = useState({});
 
   function getNext7Days() {
     const today = new Date();
@@ -43,25 +37,31 @@ export default function EachShow() {
     }
     return dates;
   }
+
   const dates = getNext7Days();
 
-  async function getShows(_date) {
+  async function getShows(date) {
+    let _date = date.date;
     const obj = { id: movieId, date: _date };
     let res = await axios.post(
       "http://localhost:4000/admin-api/get-shows",
       obj
     );
-    console.log(_date);
-    console.log(res.data);
     setShows(res.data.payload);
+    setSelectedDate(date);
   }
+
   return (
     <div className="w-full">
       <div className="text-center bg-slate-500 grid grid-cols-7 py-1 divide-x">
         {dates.map((date, index) => (
           <div
-            onClick={() => getShows(date.date)}
-            className="flex flex-col cursor-pointer"
+            onClick={() => getShows(date)}
+            className={`flex flex-col cursor-pointer ${
+              selectedDate.day === date.day
+                ? "border-b-blue-100 border-b-8"
+                : ""
+            }`}
             key={index}
           >
             <span className="day">{date.day}</span>
@@ -69,7 +69,18 @@ export default function EachShow() {
           </div>
         ))}
       </div>
-      <Outlet />
+      <div className="grid grid-cols-3 gap-4 m-2">
+        {shows.map((show, index) => (
+          <div key={index} className="bg-slate-500 p-4">
+            <div className="text-center">
+              <span className="text-lg">{show.time}</span>
+            </div>
+            <div className="text-center">
+              <span>{show.seats} seats</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

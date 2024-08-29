@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 

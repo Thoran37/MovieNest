@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 // import { axiosWithToken } from "./axiosWithToken";
 import { useNavigate } from "react-router-dom";
 import { Label } from "@/components/ui/label";
@@ -15,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 export default function AddMovieForm() {
   let { register, handleSubmit } = useForm();
@@ -49,6 +49,7 @@ export default function AddMovieForm() {
 
   return (
     <div className="w-screen container mt-5">
+      {<p className="text-red-600">{err}</p>}
       <form
         onSubmit={handleSubmit(addMovie)}
         className="p-5 bg-slate-200 rounded space-y-2 shadow-lg mb-5"
