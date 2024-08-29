@@ -1,0 +1,87 @@
+.seat-layout {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .seat-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .row-label {
+    font-size: 20px;
+    margin-right: 15px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .seat {
+    width: 32px;
+    height: 32px;
+    border-radius: 5px;
+    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    font-size: 14px;
+  }
+  
+  .seat.available {
+    background-color: #e0e0e0;
+    border: 2px solid #b0b0b0;
+  }
+  
+  .seat.selected {
+    background-color: #ff4c4c;
+    border: 2px solid #ff1a1a;
+    color: #fff;
+  }
+  
+  .seat.sold {
+    background-color: #b0b0b0;
+    border: 2px solid #8a8a8a;
+    cursor: not-allowed;
+    color: #fff;
+  }
+  
+  .seat.classic {
+    border-color: #b0b0b0;
+  }
+  
+  .seat.balcony {
+    border-color: #a0a0a0;
+  }
+  
+  .seat.recliner {
+    border-color: #909090;
+  }
+  
+  .seat-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .legend-item .seat {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border: 2px solid #b0b0b0;
+  }
+  
+  .legend-item span {
+    font-size: 16px;
+    color: #333;
+  }

@@ -60,11 +60,15 @@ export default function App() {
         },
         {
           path: "theatres",
-          element: <EachShow />,
+          element: <Dashboard />,
         },
         {
           path: "shows",
           element: <Shows />,
+        },
+        {
+          path: "shows/:movieId",
+          element: <EachShow />,
         },
         {
           path: "users",

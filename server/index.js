@@ -70,40 +70,40 @@ const storage1 = multer.diskStorage({
 const upload = multer({ storage: storage1 });
 
 // Routes with files
-app.post('/admin-api/add-movie', upload.single("img"), expressAsyncHandler(async (req, res) => {
-  let body = req.body;
-  console.log(body)
-  let existingMovie = await moviesObj.findOne({ title: body.title });
-  if (existingMovie)
-    res.status(400).send({ message: "Movie already exists" });
-  else {
-    // Add the movie to the movies collection
-    await moviesObj.insertOne(body);
+// app.post('/admin-api/add-movie', upload.single("img"), expressAsyncHandler(async (req, res) => {
+//   let body = req.body;
+//   console.log(body)
+//   let existingMovie = await moviesObj.findOne({ title: body.title });
+//   if (existingMovie)
+//     res.status(400).send({ message: "Movie already exists" });
+//   else {
+//     // Add the movie to the movies collection
+//     await moviesObj.insertOne(body);
 
-    // Add the movie to the theatres collection
-    const theatres = await theatresObj.find({}).toArray();
-    const theatreUpdates = theatres.map(theatre => {
-      return theatresObj.updateOne(
-        { theatreId: theatre.theatreId },
-        { $push: { movies: body } }
-      );
-    });
-    await Promise.all(theatreUpdates);
+//     // Add the movie to the theatres collection
+//     const theatres = await theatresObj.find({}).toArray();
+//     const theatreUpdates = theatres.map(theatre => {
+//       return theatresObj.updateOne(
+//         { theatreId: theatre.theatreId },
+//         { $push: { movies: body } }
+//       );
+//     });
+//     await Promise.all(theatreUpdates);
 
-    // Add the movie to the shows collection (create a default showtime entry)
-    const showtime = {
-      movieId: body.movieId,
-      title: body.title,
-      theatres: theatres.map(theatre => ({
-        theatreId: theatre.theatreId,
-        showtimes: []
-      }))
-    };
-    await shows.insertOne(showtime);
+//     // Add the movie to the shows collection (create a default showtime entry)
+//     const showtime = {
+//       movieId: body.movieId,
+//       title: body.title,
+//       theatres: theatres.map(theatre => ({
+//         theatreId: theatre.theatreId,
+//         showtimes: []
+//       }))
+//     };
+//     await shows.insertOne(showtime);
 
-    res.send({ message: "New Movie added and linked to theatres and showtimes" });
-  }
-}))
+//     res.send({ message: "New Movie added and linked to theatres and showtimes" });
+//   }
+// }))
 
 // Sending requests to resp routes
 app.use('/user-api', userApp)

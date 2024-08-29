@@ -19,7 +19,7 @@ adminApp.use((req, res, next) => {
   userObj = req.app.get('users')
   movieObj = req.app.get('movies')
   theatreObj = req.app.get('theatres')
-  showtimeObj = req.app.get('showtimes')
+  showtimeObj = req.app.get('shows')
   next()
 })
 
@@ -59,6 +59,11 @@ adminApp.post('/register', expressAsyncHandler(async (req, res) => {
 
 // Went to index.js because we need to upload image - in testing
 
+adminApp.post('/addMovie', expressAsyncHandler(async (req, res) => {
+  let article = req.body
+  await movieObj.insertOne(article)
+  res.send({ message: "New Article created" })
+}))
 
 // Route to delete movies
 adminApp.delete('/remove-movie/:id', expressAsyncHandler(async (req, res) => {
@@ -201,6 +206,16 @@ adminApp.put('/update-user', expressAsyncHandler(async (req, res) => {
 adminApp.get('/get-users', expressAsyncHandler(async (req, res) => {
   let users = await userObj.find().toArray()
   res.send({ message: "Users list", payload: users })
+}))
+
+// SHOWS
+// Route to get shows based on time and movie - Working Fine
+adminApp.post('/get-shows', expressAsyncHandler(async (req, res) => {
+  const { id, date } = req.body
+  let _date = new Date(date)
+  _date = _date.toISOString().split('T')[0]
+  let shows = await showtimeObj.find({ movieId: id, date: _date }).toArray()
+  res.send({ message: "Shows list", payload: shows })
 }))
 
 // Export adminApp
