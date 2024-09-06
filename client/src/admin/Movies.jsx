@@ -45,7 +45,7 @@ function Movies() {
       </Button>
       <h1 className="text-center text-4xl mb-6">MOVIES</h1>
       {movies.map((movie) => (
-        <Card className="m-3">
+        <Card className="m-3" key={movie.movieId}>
           <CardHeader>
             <CardTitle>
               {movie.title}

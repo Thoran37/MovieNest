@@ -136,7 +136,7 @@ export default function Homepage() {
                 to={`/movie/${movie.title}`}
                 state={{ movies }} // Pass movies as state
               >
-                <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-lg shadow-lg w-full">
+                <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-lg shadow-lg w-full h-100">
                   View Details
                 </button>
               </Link>
