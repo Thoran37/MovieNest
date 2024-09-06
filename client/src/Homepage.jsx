@@ -51,7 +51,7 @@ export default function Homepage() {
                   <img
                     src={movie.poster}
                     alt={movie.title}
-                    className="w-full h-full object-cover rounded-lg shadow-md"
+                    className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-4 flex items-center justify-center">
                     <div className="text-center text-white p-6 bg-black bg-opacity-60 rounded-lg shadow-lg max-w-md">

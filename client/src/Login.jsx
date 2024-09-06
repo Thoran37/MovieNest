@@ -26,7 +26,9 @@ export default function Login() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Login</Button>
+        <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-lg">
+          Login
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

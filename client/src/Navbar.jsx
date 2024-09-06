@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import Login from "./Login.jsx";
 
 export default function Navbar() {
   return (
     <nav className="bg-gray-900 text-gray-100 shadow-md">
       <div className="container mx-auto flex items-center justify-between p-4">
-        <Link to="/" className="text-2xl font-bold hover:text-blue-400 transition duration-300 ease-in-out">
+        <Link
+          to="/"
+          className="text-2xl font-bold hover:text-blue-400 transition duration-300 ease-in-out"
+        >
           MovieNest
         </Link>
         <ul className="flex space-x-6">
@@ -34,9 +38,7 @@ export default function Navbar() {
           </li>
         </ul>
         <div>
-          <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-lg shadow-lg">
-            Sign In
-          </button>
+          <Login />
         </div>
       </div>
     </nav>
