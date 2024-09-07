@@ -62,7 +62,7 @@ export default function Homepage() {
                       <p className="mt-4 text-sm">{movie.desc}</p>
                       <Link
                         to={`/movie/${movie.movieId}`}
-                        state={{ movies }} // Pass movies as state
+                        state={{ movieId: movie.movieId, movies }}
                       >
                         <button className="mt-6 bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-6 rounded-lg shadow-lg">
                           View Details
@@ -114,7 +114,7 @@ export default function Homepage() {
                 <CardFooter className="p-4">
                   <Link
                     to={`/movie/${movie.movieId}`}
-                    state={{ movies }} // Pass movies as state
+                    state={{ movieId: movie.movieId, movies }}
                   >
                     <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-lg shadow-lg w-full">
                       View Details
