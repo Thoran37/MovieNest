@@ -8,6 +8,8 @@ import Users from "./admin/Users.jsx";
 import Shows from "./admin/Shows.jsx";
 import EachShow from "./admin/EachShow.jsx";
 import Homepage from "./Homepage.jsx";
+import AddShows from "./admin/AddShows.jsx";
+import Admin from "./admin/Admin.jsx";
 // import MovieDetails from "./MovieDetails.jsx";
 
 export default function App() {
@@ -41,6 +43,10 @@ export default function App() {
       errorElement: <ErrorPage />,
       children: [
         {
+          path: "",
+          element: <Admin />,
+        },
+        {
           path: "movies",
           element: <Outlet />,
           children: [
@@ -65,6 +71,10 @@ export default function App() {
         {
           path: "shows",
           element: <Shows />,
+        },
+        {
+          path: "add-shows/:movieId",
+          element: <AddShows />,
         },
         {
           path: "shows/:movieId",

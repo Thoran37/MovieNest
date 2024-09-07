@@ -17,7 +17,7 @@ import {
 import { useState } from "react";
 
 export default function AddMovieForm() {
-  let { register, handleSubmit } = useForm();
+  let { register, handleSubmit, setValue } = useForm();
   let navigate = useNavigate();
   let [err, setErr] = useState("");
 
@@ -38,7 +38,7 @@ export default function AddMovieForm() {
       "http://localhost:4000/admin-api/addMovie",
       movieObj
     );
-    console.log(res);
+    console.log(movieObj.lang);
     if (
       res.data.message ===
       "New Movie added and linked to theatres and showtimes"
@@ -62,7 +62,7 @@ export default function AddMovieForm() {
           </div>
           <div>
             <Label className="text-lg">Language</Label>
-            <Select>
+            <Select onValueChange={(value) => setValue("lang", value)}>
               <SelectTrigger className="w-64">
                 <SelectValue placeholder="Select language" />
               </SelectTrigger>
@@ -74,6 +74,7 @@ export default function AddMovieForm() {
                 </SelectGroup>
               </SelectContent>
             </Select>
+            <Input type="hidden" {...register("lang")} />
           </div>
           <div>
             <Label className="text-lg mb-0">Movie Image</Label>
