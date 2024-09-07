@@ -27,7 +27,10 @@ const ViewDetails = () => {
           <div className="absolute bottom-10 left-10">
             <h1 className="text-5xl font-bold text-white mb-2">{movie.title}</h1>
             <p className="text-lg font-semibold text-gray-400">
-              {movie.genre} • {movie.time}
+              {movie.genre.join(" • ")}
+            </p>
+            <p className="text-lg font-semibold text-gray-400">
+            {movie.time}
             </p>
           </div>
         </div>
@@ -56,9 +59,14 @@ const ViewDetails = () => {
             
             {/* Tags */}
             <div className="mb-4 space-x-2">
-              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">Fantasy</span>
-              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">Action</span>
-              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">Romance</span>
+              {movie.genre.map((genre, index) => (
+                <span
+                  key={index}
+                  className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm"
+                >
+                  {genre}
+                </span>
+              ))}
             </div>
 
             {/* Cast */}
