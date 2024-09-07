@@ -11,6 +11,7 @@ import Homepage from "./Homepage.jsx";
 import ViewDetails from "./ViewDetails.jsx";
 import Admin from "./admin/Admin.jsx"
 import AddShows from "./admin/AddShows.jsx"
+import ShowsDetails from "./ShowsDetails.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
@@ -25,15 +26,9 @@ export default function App() {
       children: [
         {
           path: "shows",
-          element: <Dashboard />,
-          children: [
-            {
-              path: "showId",
-              element: <Dashboard />,
-            },
-          ],
-        },
-      ],
+          element: <ShowsDetails />
+        }
+      ]
     },
     {
       path: "admin",

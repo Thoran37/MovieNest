@@ -1,11 +1,22 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams, Link } from "react-router-dom";
 
 const ViewDetails = () => {
   const location = useLocation();
   const { state } = location;
+
+  // If state is null or movies are not available, handle the error gracefully
+  if (!state || !state.movies || !state.movieId) {
+    return (
+      <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
+        <p>Invalid movie data. Please try again.</p>
+      </div>
+    );
+  }
+
   const movie = state.movies.find((m) => m.movieId === state.movieId);
 
+  // Handle case where movie is not found
   if (!movie) {
     return (
       <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center">
@@ -29,9 +40,7 @@ const ViewDetails = () => {
             <p className="text-lg font-semibold text-gray-400">
               {movie.genre.join(" • ")}
             </p>
-            <p className="text-lg font-semibold text-gray-400">
-            {movie.time}
-            </p>
+            <p className="text-lg font-semibold text-gray-400">{movie.time}</p>
           </div>
         </div>
       </div>
@@ -47,8 +56,12 @@ const ViewDetails = () => {
               className="w-64 h-auto rounded-lg shadow-lg mb-4 border-4 border-gray-800"
             />
             {/* Book Now Button */}
-            <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg w-full">
-              Book Now
+            <button
+              className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg w-full"
+            >
+              <Link to={`/movie/${movie.movieId}/shows`} state={{ movieTitle: movie.title }}>
+                Book Now
+              </Link>
             </button>
           </div>
 
@@ -56,7 +69,7 @@ const ViewDetails = () => {
           <div className="flex-grow">
             <h2 className="text-3xl font-bold mb-4 text-white">{movie.title}</h2>
             <p className="text-gray-400 mb-6">{movie.desc}</p>
-            
+
             {/* Tags */}
             <div className="mb-4 space-x-2">
               {movie.genre.map((genre, index) => (
@@ -89,7 +102,7 @@ const ViewDetails = () => {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-blue-400">Music Director</h4>
-                <p className="text-gray-300">{movie['music director']}</p>
+                <p className="text-gray-300">{movie["music director"]}</p>
               </div>
               <div>
                 <h4 className="text-lg font-bold text-blue-400">Release Date</h4>
@@ -99,6 +112,7 @@ const ViewDetails = () => {
           </div>
         </div>
       </div>
+      <Outlet context={{ movieTitle: movie.title }} />
     </div>
   );
 };
