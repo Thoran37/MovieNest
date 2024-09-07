@@ -173,7 +173,7 @@ adminApp.put('/update-theatre', expressAsyncHandler(async (req, res) => {
 
 // Route to get all theatres
 adminApp.get('/get-theatres', expressAsyncHandler(async (req, res) => {
-  const theatres = await theatreObj.find({}).toArray(); // Fetch all theatres
+  const theatres = await theatreObj.find().toArray(); // Fetch all theatres
   res.send({ message: "Theatres fetched successfully", payload: theatres });
 }));
 
@@ -217,6 +217,19 @@ adminApp.post('/get-shows', expressAsyncHandler(async (req, res) => {
   let shows = await showtimeObj.find({ movieId: id, date: _date }).toArray()
   res.send({ message: "Shows list", payload: shows })
 }))
+
+// Route to get all shows
+adminApp.get('/get-shows', expressAsyncHandler(async (req, res) => {
+  let shows = await showtimeObj.find().toArray()
+  res.send({ message: "Shows list", payload: shows })
+}))
+
+// Route to add shows
+// adminApp.post('/add-shows', expressAsyncHandler(async (req, res) => {
+//   const body = req.body
+//   let result = await showtimeObj.find({ theatre:})
+//   console.log(body)
+// }))
 
 // Export adminApp
 module.exports = adminApp

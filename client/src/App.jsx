@@ -39,6 +39,10 @@ export default function App() {
       errorElement: <ErrorPage />,
       children: [
         {
+          path: "",
+          element: <Admin />,
+        },
+        {
           path: "movies",
           element: <Outlet />,
           children: [
@@ -63,6 +67,10 @@ export default function App() {
         {
           path: "shows",
           element: <Shows />,
+        },
+        {
+          path: "add-shows/:movieId",
+          element: <AddShows />,
         },
         {
           path: "shows/:movieId",

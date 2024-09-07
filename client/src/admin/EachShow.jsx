@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 export default function EachShow() {
   const { movieId } = useParams();
   const [shows, setShows] = useState([]);
-  const [selectedDate, setSelectedDate] = useState({});
 
   function getNext7Days() {
     const today = new Date();
@@ -39,6 +38,7 @@ export default function EachShow() {
   }
 
   const dates = getNext7Days();
+  const [selectedDate, setSelectedDate] = useState(dates[0]);
 
   async function getShows(date) {
     let _date = date.date;
@@ -50,11 +50,17 @@ export default function EachShow() {
     setShows(res.data.payload);
     setSelectedDate(date);
   }
-  const showsa = [
-    { time: "10:00 AM", seats: 50, theatre: "Theatre 1" },
-    { time: "12:00 PM", seats: 30, theatre: "Theatre 2" },
-    { time: "02:00 PM", seats: 20, theatre: "Theatre 3" },
-  ];
+
+  function groupShows() {
+    shows.reduce((acc, show) => {
+      if (!acc[show.theatreId]) acc[show.theatreId] = [];
+      acc[show.theatreId].push(show);
+      console.log(acc);
+      return acc;
+    }, {});
+  }
+  groupShows();
+
   return (
     <div className="w-full">
       <div className="text-center bg-slate-500 grid grid-cols-7 py-1 divide-x">
@@ -75,7 +81,7 @@ export default function EachShow() {
       </div>
       <div>
         <div className="grid grid-cols-3 gap-4 m-2">
-          {showsa.map((show, index) => (
+          {shows.map((show, index) => (
             <div key={index} className="bg-slate-500 p-4">
               <div className="text-center">
                 <span className="text-lg">{show.time}</span>
