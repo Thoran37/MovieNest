@@ -8,7 +8,7 @@ import Users from "./admin/Users.jsx";
 import Shows from "./admin/Shows.jsx";
 import EachShow from "./admin/EachShow.jsx";
 import Homepage from "./Homepage.jsx";
-// import MovieDetails from "./MovieDetails.jsx";
+import ViewDetails from "./ViewDetails.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
@@ -16,20 +16,18 @@ export default function App() {
       path: "",
       element: <Homepage />,
       errorElement: <ErrorPage />,
+    },
+    {
+      path: "movie/:_id",
+      element: <ViewDetails />,
       children: [
         {
-          path: "movie/:title",
+          path: "shows",
           element: <Dashboard />,
           children: [
             {
-              path: "shows",
+              path: "showId",
               element: <Dashboard />,
-              children: [
-                {
-                  path: "showId",
-                  element: <Dashboard />,
-                },
-              ],
             },
           ],
         },
