@@ -62,7 +62,10 @@ export default function Homepage() {
                     <div className="text-center text-white p-6 bg-black bg-opacity-60 rounded-lg shadow-lg max-w-md">
                       <h2 className="text-2xl font-bold mb-2">{movie.title}</h2>
                       <p className="text-lg font-semibold">
-                        {movie.genre} • {movie.time}
+                      <p className="text-lg font-semibold">
+                        {movie.genre.join(" • ")}
+                      </p>
+                       • {movie.time}
                       </p>
                       <p className="mt-4 text-sm">{movie.desc}</p>
                       <button
@@ -110,7 +113,12 @@ export default function Homepage() {
                     {movie.title}
                   </CardTitle>
                   <CardDescription className="text-sm text-gray-400">
-                    {movie.genre} • {movie.time}
+                  <p className="text-md font-semibold text-gray-400">
+                    {movie.genre.join(" • ")}
+                  </p>
+                  <p>
+                    {movie.time}
+                  </p>
                   </CardDescription>
                   <p className="mt-4 text-sm">{movie.desc}</p>
                 </CardContent>

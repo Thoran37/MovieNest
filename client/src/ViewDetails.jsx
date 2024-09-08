@@ -32,8 +32,9 @@ const ViewDetails = () => {
               {state.title}
             </h1>
             <p className="text-lg font-semibold text-gray-400">
-              {state.genre.join(" • ")} • {state.time}
+              {state.genre.join(" • ")}
             </p>
+            <p className="text-lg font-semibold text-gray-400">{state.time}</p>
           </div>
         </div>
       </div>
@@ -66,14 +67,15 @@ const ViewDetails = () => {
 
             {/* Tags */}
             <div className="mb-4 space-x-2">
-              {state.genre.map((actor, index) => (
-                <span
-                  className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm"
-                  key={index}
-                >
-                  {actor}
-                </span>
-              ))}
+              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
+                Fantasy
+              </span>
+              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
+                Action
+              </span>
+              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
+                Romance
+              </span>
             </div>
 
             {/* Cast */}
