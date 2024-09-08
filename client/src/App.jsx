@@ -9,8 +9,10 @@ import Shows from "./admin/Shows.jsx";
 import EachShow from "./admin/EachShow.jsx";
 import Homepage from "./Homepage.jsx";
 import ViewDetails from "./ViewDetails.jsx";
-import Admin from "./admin/Admin.jsx"
-import AddShows from "./admin/AddShows.jsx"
+import Admin from "./admin/Admin.jsx";
+import AddShows from "./admin/AddShows.jsx";
+import MainPage from "./user/seatsLayout/MainPage.jsx";
+import TheaterList from "./user/seatsLayout/TheaterList.jsx"; // Import TheaterList component
 
 export default function App() {
   let router = createBrowserRouter([
@@ -83,6 +85,14 @@ export default function App() {
           element: <Users />,
         },
       ],
+    },
+    {
+      path: "theaterlist", // TheaterList route
+      element: <TheaterList />,
+    },
+    {
+      path: "mainpage",
+      element: <MainPage />,
     },
   ]);
 

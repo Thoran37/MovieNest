@@ -1,10 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ViewDetails = () => {
   const location = useLocation();
   const { state } = location;
   const movie = state.movies.find((m) => m.movieId === state.movieId);
+  const navigate = useNavigate(); // Add useNavigate
 
   if (!movie) {
     return (
@@ -13,6 +14,11 @@ const ViewDetails = () => {
       </div>
     );
   }
+
+  const handleBookNow = () => {
+    // Navigate to the TheaterList and pass the movie data
+    navigate("/theaterlist", { state: { movie } });
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100">
@@ -29,9 +35,7 @@ const ViewDetails = () => {
             <p className="text-lg font-semibold text-gray-400">
               {movie.genre.join(" • ")}
             </p>
-            <p className="text-lg font-semibold text-gray-400">
-            {movie.time}
-            </p>
+            <p className="text-lg font-semibold text-gray-400">{movie.time}</p>
           </div>
         </div>
       </div>
@@ -47,7 +51,10 @@ const ViewDetails = () => {
               className="w-64 h-auto rounded-lg shadow-lg mb-4 border-4 border-gray-800"
             />
             {/* Book Now Button */}
-            <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg w-full">
+            <button
+              className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg w-full"
+              onClick={handleBookNow} // Handle button click
+            >
               Book Now
             </button>
           </div>
@@ -56,7 +63,6 @@ const ViewDetails = () => {
           <div className="flex-grow">
             <h2 className="text-3xl font-bold mb-4 text-white">{movie.title}</h2>
             <p className="text-gray-400 mb-6">{movie.desc}</p>
-            
             {/* Tags */}
             <div className="mb-4 space-x-2">
               {movie.genre.map((genre, index) => (
@@ -89,7 +95,7 @@ const ViewDetails = () => {
               </div>
               <div>
                 <h4 className="text-lg font-bold text-blue-400">Music Director</h4>
-                <p className="text-gray-300">{movie['music director']}</p>
+                <p className="text-gray-300">{movie["music director"]}</p>
               </div>
               <div>
                 <h4 className="text-lg font-bold text-blue-400">Release Date</h4>
