@@ -24,16 +24,14 @@ export default function App() {
       path: "movie/:id",
       element: <ViewDetails />,
       errorElement: <ErrorPage />,
+    },
+    {
+      path: "movie/:id/shows",
+      element: <ShowsDetails />,
       children: [
         {
-          path: "shows",
-          element: <ShowsDetails />,
-          children: [
-            {
-              path: "showId",
-              element: <Dashboard />,
-            },
-          ],
+          path: "showId",
+          element: <Dashboard />,
         },
       ],
     },

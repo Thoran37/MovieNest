@@ -69,3 +69,6 @@ Content-Type: application/json
     "movieId":"1724689844610",
     "date":"25/7/23"
 }
+
+### Get shows by theatre
+GET http://localhost:4000/admin-api/get-shows-by-theatre/1

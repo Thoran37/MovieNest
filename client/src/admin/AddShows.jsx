@@ -38,9 +38,18 @@ export default function AddShows() {
     obj.movieId = state.movieId;
     obj.title = state.title;
     obj.blockedSeats = [];
-    let res = await axios.post(
-      "http://localhost:4000/admin-api/add-shows",
-      obj
+    console.log(obj);
+    // let res = await axios.post(
+    //   "http://localhost:4000/admin-api/add-shows",
+    //   obj
+    // );
+  }
+
+  function handleChange(value) {
+    setValue("theatreId", value);
+    setValue(
+      "theatreName",
+      theatres.find((ele) => ele.theatreId === value).name
     );
   }
 
@@ -63,7 +72,7 @@ export default function AddShows() {
           className="p-5 bg-slate-200 rounded space-y-2 shadow-2xl shadow-slate-500 mb-5"
         >
           <Label className="text-lg">Theatre Name</Label>
-          <Select onValueChange={(value) => setValue("theatreId", value)}>
+          <Select onChange={(value) => handleChange(value)}>
             <SelectTrigger className="w-64">
               <SelectValue placeholder="Select Theatre" />
             </SelectTrigger>
@@ -78,6 +87,7 @@ export default function AddShows() {
             </SelectContent>
           </Select>
           <Input type="hidden" {...register("theatreId")} />
+          <Input type="hidden" {...register("theatreName")} />
           <Label className="text-lg">Date</Label>
           <Input className="w-64" type="date" {...register("date")} />
           <Label className="text-lg">Show Timing</Label>

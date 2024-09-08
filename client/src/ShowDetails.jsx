@@ -9,7 +9,7 @@ export default function ShowsDetails() {
   async function getMovies() {
     try {
       let res = await axios.get(
-        `http://localhost:4000/user-api/get-shows/${state.movieId}`
+        `http://localhost:4000/admin-api/get-shows-by-theatre/${state.movieId}`
       );
       console.log(res);
       setShows(res.data.payload);
@@ -30,33 +30,18 @@ export default function ShowsDetails() {
           No shows available for this movie.
         </p>
       ) : (
-        <table className="border table-fixed">
-          <caption>A list of the running shows.</caption>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Movie Name</th>
-              <th>No. of Theatres</th>
-              <th>No. of Shows</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shows.map((movie, index) => (
-              <tr key={index}>
-                <td>
-                  <img
-                    src={movie.img}
-                    alt={movie.title}
-                    className="max-w-xs max-h-32"
-                  />
-                </td>
-                <td className="font-bold">{movie.title}</td>
-                <td>{movie.theatreCount}</td>
-                <td>{movie.showCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div>
+          {shows.map((show, ind) => (
+            <div key={ind}>
+              <p>{show.theatreId}</p>
+              {shows.map((sh) => {
+                if (sh.theatreId === show.theatreId)
+                  return <p key={ind}>{sh.time}</p>;
+                return null;
+              })}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

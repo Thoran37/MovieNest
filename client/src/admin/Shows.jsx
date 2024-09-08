@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { GrLinkNext } from "react-icons/gr";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Shows() {
   let [movies, setMovies] = useState([]);

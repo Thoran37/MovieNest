@@ -218,6 +218,13 @@ adminApp.post('/get-shows', expressAsyncHandler(async (req, res) => {
   res.send({ message: "Shows list", payload: shows })
 }))
 
+// Route to get shows based on movie, theatre
+adminApp.get('/get-shows-by-theatre/:id', expressAsyncHandler(async (req, res) => {
+  let id = req.params.id
+  let theatres = await showtimeObj.find({ movieId: id }).toArray()
+  res.send({ message: "Sending theatre list", payload: theatres })
+}))
+
 // Route to get all shows
 adminApp.get('/get-shows', expressAsyncHandler(async (req, res) => {
   let shows = await showtimeObj.find().toArray()
