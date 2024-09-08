@@ -13,6 +13,7 @@ import Admin from "./admin/Admin.jsx";
 import AddShows from "./admin/AddShows.jsx";
 import MainPage from "./user/seatsLayout/MainPage.jsx";
 import TheaterList from "./user/seatsLayout/TheaterList.jsx"; // Import TheaterList component
+import ShowsDetails from "./ShowDetails.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
