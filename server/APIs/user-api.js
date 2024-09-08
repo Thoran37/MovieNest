@@ -65,9 +65,9 @@ userApp.get("/get-movies", expressAsyncHandler(async (req, res) => {
 }));
 
 // Route to get showtimes
-userApp.get("/get-shows/:title", verifyToken, expressAsyncHandler(async (req, res) => {
-  let name = req.params.title
-  const shows = await showsObj.find({ title: name }).toArray()
+userApp.get("/get-shows/:id", expressAsyncHandler(async (req, res) => {
+  let name = req.params.id
+  const shows = await showsObj.find({ movieId: name }).toArray()
   res.send({ message: "Showtimes are retrieved", payload: shows })
 }))
 

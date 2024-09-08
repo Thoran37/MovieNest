@@ -1,9 +1,13 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const ViewDetails = () => {
   const { state } = useLocation();
-  console.log(state);
+  let navigate = useNavigate();
+
+  function gotoShows() {
+    navigate(`/movie/${state.movieId}/shows`, { state: state });
+  }
 
   if (!state) {
     return (
@@ -28,7 +32,7 @@ const ViewDetails = () => {
               {state.title}
             </h1>
             <p className="text-lg font-semibold text-gray-400">
-              {state.genre} • {state.time}
+              {state.genre.join(" • ")} • {state.time}
             </p>
           </div>
         </div>
@@ -45,7 +49,10 @@ const ViewDetails = () => {
               className="w-64 h-auto rounded-lg shadow-lg mb-4 border-4 border-gray-800"
             />
             {/* Book Now Button */}
-            <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg w-full">
+            <button
+              className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-3 px-6 rounded-lg shadow-lg w-full"
+              onClick={gotoShows}
+            >
               Book Now
             </button>
           </div>
@@ -59,15 +66,14 @@ const ViewDetails = () => {
 
             {/* Tags */}
             <div className="mb-4 space-x-2">
-              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
-                Fantasy
-              </span>
-              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
-                Action
-              </span>
-              <span className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm">
-                Romance
-              </span>
+              {state.genre.map((actor, index) => (
+                <span
+                  className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm"
+                  key={index}
+                >
+                  {actor}
+                </span>
+              ))}
             </div>
 
             {/* Cast */}
@@ -104,6 +110,7 @@ const ViewDetails = () => {
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
