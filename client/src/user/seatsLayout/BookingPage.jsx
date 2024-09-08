@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Import useLocation
-import MovieBar from './MovieBar';
-import ShowTime from './ShowTime';
-import SeatLayout from './SeatLayout';
-import './MainPage.css';
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
+import MovieBar from "./MovieBar";
+import ShowTime from "./ShowTime";
+import SeatLayout from "./SeatLayout";
+import "./MainPage.css";
 
-const MainPage = () => {
+const BookingPage = () => {
   const location = useLocation();
   const { state } = location; // Get state from location
   const [movie, setMovie] = useState({});
   const [timings, setTimings] = useState([]);
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState("");
   const [seats, setSeats] = useState([]);
-  console.log(state)
+  console.log(state);
   useEffect(() => {
     if (state && state.movie) {
       setMovie(state.movie);
@@ -20,8 +20,12 @@ const MainPage = () => {
 
     const randomTimings = ["04:15 PM", "04:40 PM", "07:55 PM", "11:10 PM"];
     const randomSeats = [
-      Array(10).fill().map((_, i) => ({ number: i + 1, status: 'available' })),
-      Array(10).fill().map((_, i) => ({ number: i + 11, status: 'available' })),
+      Array(10)
+        .fill()
+        .map((_, i) => ({ number: i + 1, status: "available" })),
+      Array(10)
+        .fill()
+        .map((_, i) => ({ number: i + 11, status: "available" })),
     ];
 
     setTimings(randomTimings);
@@ -34,8 +38,11 @@ const MainPage = () => {
 
   const handleSelectSeat = (rowIndex, seatIndex) => {
     const updatedSeats = [...seats];
-    if (updatedSeats[rowIndex][seatIndex].status !== 'sold') {
-      updatedSeats[rowIndex][seatIndex].status = updatedSeats[rowIndex][seatIndex].status === 'selected' ? 'available' : 'selected';
+    if (updatedSeats[rowIndex][seatIndex].status !== "sold") {
+      updatedSeats[rowIndex][seatIndex].status =
+        updatedSeats[rowIndex][seatIndex].status === "selected"
+          ? "available"
+          : "selected";
     }
     setSeats(updatedSeats);
   };
@@ -43,7 +50,11 @@ const MainPage = () => {
   return (
     <div>
       <MovieBar movieName={movie.title} theatreName={movie.theatre} />
-      <ShowTime timings={timings} selectedTime={selectedTime} onSelectTime={handleSelectTime} />
+      <ShowTime
+        timings={timings}
+        selectedTime={selectedTime}
+        onSelectTime={handleSelectTime}
+      />
       <SeatLayout
         seats={seats}
         onSelectSeat={handleSelectSeat}
@@ -55,4 +66,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default BookingPage;

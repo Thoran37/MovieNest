@@ -5,7 +5,7 @@ import "./index.css";
 import ShowTimes from "./admin/ShowTimes.jsx";
 import { Provider } from "react-redux";
 import { Store } from "./redux/Store.js";
-import MainPage from "./user/seatsLayout/MainPage.jsx";
+import MainPage from "./user/seatsLayout/BookingPage.jsx";
 import TheaterList from "./user/seatsLayout/TheaterList.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

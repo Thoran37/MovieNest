@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./SeatLayout.css";
+import { useNavigate } from "react-router-dom";
 
 const SeatLayout = ({ onSelectSeat, showTime, movieName, theatre }) => {
   const [seats, setSeats] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     const generateSeatLayout = () => {
@@ -68,6 +70,7 @@ const SeatLayout = ({ onSelectSeat, showTime, movieName, theatre }) => {
     .join(", ");
 
   const confirmBooking = () => {
+    navigate("/payment");
     console.log("Booking Confirmed", selectedSeats);
     // Add your booking logic here
   };

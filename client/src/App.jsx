@@ -1,5 +1,4 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import AdminDashboard from "./admin/AdminDashboard.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Dashboard from "./Dashboard.jsx";
 import Movies from "./admin/Movies.jsx";
@@ -9,11 +8,16 @@ import Shows from "./admin/Shows.jsx";
 import EachShow from "./admin/EachShow.jsx";
 import Homepage from "./Homepage.jsx";
 import ViewDetails from "./ViewDetails.jsx";
-import Admin from "./admin/Admin.jsx";
 import AddShows from "./admin/AddShows.jsx";
-import MainPage from "./user/seatsLayout/MainPage.jsx";
-import TheaterList from "./user/seatsLayout/TheaterList.jsx"; // Import TheaterList component
+import BookingPage from "./user/seatsLayout/BookingPage.jsx";
+import TheaterList from "./user/seatsLayout/TheaterList.jsx";
 import ShowsDetails from "./ShowDetails.jsx";
+import Theatres from "./admin/Theatres.jsx";
+import AddTheatre from "./admin/AddTheatre.jsx";
+import AdminSkeleton from "./admin/AdminSkeleton.jsx";
+import AdminDashboard from "./admin/AdminDashboard.jsx";
+import PaymentGateway from "./PaymentGateway.jsx";
+import LastPage from "./LastPage.jsx";
 
 export default function App() {
   let router = createBrowserRouter([
@@ -30,21 +34,35 @@ export default function App() {
     {
       path: "movie/:id/shows",
       element: <ShowsDetails />,
-      children: [
-        {
-          path: "showId",
-          element: <Dashboard />,
-        },
-      ],
+    },
+    {
+      path: "movie/:id/shows/:showId",
+      element: <BookingPage />,
+    },
+    {
+      path: "theatrelist",
+      element: <TheaterList />,
+    },
+    {
+      path: "booking-page",
+      element: <BookingPage />,
+    },
+    {
+      path: "payment",
+      element: <PaymentGateway />,
+    },
+    {
+      path: "payment/over",
+      element: <LastPage />,
     },
     {
       path: "admin",
-      element: <AdminDashboard />,
+      element: <AdminSkeleton />,
       errorElement: <ErrorPage />,
       children: [
         {
           path: "",
-          element: <Admin />,
+          element: <AdminDashboard />,
         },
         {
           path: "movies",
@@ -61,11 +79,21 @@ export default function App() {
           ],
         },
         {
-          path: "bookings",
-          element: <Dashboard />,
+          path: "theatres",
+          element: <Outlet />,
+          children: [
+            {
+              path: "",
+              element: <Theatres />,
+            },
+            {
+              path: "add-theatre",
+              element: <AddTheatre />,
+            },
+          ],
         },
         {
-          path: "theatres",
+          path: "bookings",
           element: <Dashboard />,
         },
         {
@@ -85,14 +113,6 @@ export default function App() {
           element: <Users />,
         },
       ],
-    },
-    {
-      path: "theaterlist", // TheaterList route
-      element: <TheaterList />,
-    },
-    {
-      path: "mainpage",
-      element: <MainPage />,
     },
   ]);
 

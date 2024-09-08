@@ -15,7 +15,7 @@ const TheaterList = () => {
   // Handle theater selection
   const handleSelectTheater = (theater) => {
     // Navigate to MainPage (or any other component) with selected theater data
-    navigate("/mainpage", { state: { theater } });
+    navigate("/booking-page", { state: { theater } });
   };
 
   return (
