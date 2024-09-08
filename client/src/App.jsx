@@ -11,7 +11,8 @@ import Homepage from "./Homepage.jsx";
 import ViewDetails from "./ViewDetails.jsx";
 import Admin from "./admin/Admin.jsx";
 import AddShows from "./admin/AddShows.jsx";
-import ShowsDetails from "./ShowDetails.jsx";
+import MainPage from "./user/seatsLayout/MainPage.jsx";
+import TheaterList from "./user/seatsLayout/TheaterList.jsx"; // Import TheaterList component
 
 export default function App() {
   let router = createBrowserRouter([
@@ -21,7 +22,7 @@ export default function App() {
       errorElement: <ErrorPage />,
     },
     {
-      path: "movie/:id",
+      path: "movie/:_id",
       element: <ViewDetails />,
       errorElement: <ErrorPage />,
     },
@@ -83,6 +84,14 @@ export default function App() {
           element: <Users />,
         },
       ],
+    },
+    {
+      path: "theaterlist", // TheaterList route
+      element: <TheaterList />,
+    },
+    {
+      path: "mainpage",
+      element: <MainPage />,
     },
   ]);
 

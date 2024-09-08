@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -21,7 +21,6 @@ import Footer from "./Footer";
 
 export default function Homepage() {
   const [movies, setMovies] = useState([]);
-  let navigate = useNavigate();
 
   async function getMovies() {
     try {
@@ -30,10 +29,6 @@ export default function Homepage() {
     } catch (error) {
       console.error("Failed to fetch movies:", error);
     }
-  }
-
-  function gotoView(obj) {
-    navigate(`/movie/${obj.movieId}`, { state: obj });
   }
 
   useEffect(() => {
@@ -68,12 +63,14 @@ export default function Homepage() {
                        • {movie.time}
                       </p>
                       <p className="mt-4 text-sm">{movie.desc}</p>
-                      <button
-                        className="mt-6 bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-6 rounded-lg shadow-lg"
-                        onClick={() => gotoView(movie)}
+                      <Link
+                        to={`/movie/${movie.movieId}`}
+                        state={{ movieId: movie.movieId, movies }}
                       >
-                        View Details
-                      </button>
+                        <button className="mt-6 bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-6 rounded-lg shadow-lg">
+                          View Details
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </CarouselItem>
@@ -99,7 +96,7 @@ export default function Homepage() {
             {movies.map((movie) => (
               <Card
                 key={movie.movieId}
-                className="bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col"
+                className="bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1"
               >
                 <CardHeader className="p-0">
                   <img
@@ -108,7 +105,7 @@ export default function Homepage() {
                     className="w-full h-48 object-cover rounded-t-lg"
                   />
                 </CardHeader>
-                <CardContent className="p-4 flex-1">
+                <CardContent className="p-4">
                   <CardTitle className="text-xl font-bold">
                     {movie.title}
                   </CardTitle>
@@ -123,12 +120,14 @@ export default function Homepage() {
                   <p className="mt-4 text-sm">{movie.desc}</p>
                 </CardContent>
                 <CardFooter className="p-4">
-                  <button
-                    className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-lg shadow-lg w-full"
-                    onClick={() => gotoView(movie)}
+                  <Link
+                    to={`/movie/${movie.movieId}`}
+                    state={{ movieId: movie.movieId, movies }}
                   >
-                    View Details
-                  </button>
+                    <button className="bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-4 rounded-lg shadow-lg w-full">
+                      View Details
+                    </button>
+                  </Link>
                 </CardFooter>
               </Card>
             ))}

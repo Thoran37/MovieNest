@@ -35,9 +35,10 @@ export default function AddMovieForm() {
     // console.log(movieObj);
     // console.log(form.getAll());
     let res = await axios.post(
-      "http://localhost:4000/admin-api/add-movie",
+      "http://localhost:4000/admin-api/addMovie",
       movieObj
     );
+    console.log(movieObj.lang);
     if (
       res.data.message ===
       "New Movie added and linked to theatres and showtimes"
@@ -77,11 +78,11 @@ export default function AddMovieForm() {
           </div>
           <div>
             <Label className="text-lg mb-0">Movie Image</Label>
-            <Input type="url" className="w-64" {...register("img")} />
+            <Input type="file" className="w-64" {...register("img")} />
           </div>
           <div>
             <Label className="text-lg mb-0">Movie Big Poster</Label>
-            <Input type="url" className="w-64" {...register("poster")} />
+            <Input type="file" className="w-64" {...register("poster")} />
           </div>
           <div>
             <Label className="text-lg mb-0">Genre</Label>
@@ -96,7 +97,7 @@ export default function AddMovieForm() {
             <Input type="text" className="w-64" {...register("producer")} />
           </div>
           <div>
-            <Label className="text-lg mb-0">Runtime</Label>
+            <Label className="text-lg mb-0">Runtime (in mins)</Label>
             <Input type="text" className="w-64" {...register("duration")} />
           </div>
           <div>
@@ -113,7 +114,7 @@ export default function AddMovieForm() {
           </div>
           <div>
             <Label className="text-lg mb-0">Trailer</Label>
-            <Input type="url" className="w-64" {...register("trailer")} />
+            <Input type="file" className="w-64" {...register("trailer")} />
           </div>
           <div>
             <Label className="text-lg mb-0">Rating</Label>

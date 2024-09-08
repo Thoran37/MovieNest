@@ -59,7 +59,7 @@ adminApp.post('/register', expressAsyncHandler(async (req, res) => {
 
 // Went to index.js because we need to upload image - in testing
 
-adminApp.post('/add-movie', expressAsyncHandler(async (req, res) => {
+adminApp.post('/addMovie', expressAsyncHandler(async (req, res) => {
   let article = req.body
   await movieObj.insertOne(article)
   res.send({ message: "New Article created" })
