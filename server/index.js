@@ -20,7 +20,11 @@ app.use(morgan("common"));
 
 // CORS
 const cors = require('cors')
-app.use(cors());
+app.use(cors({
+  origin:{"https://movie-nest-three.vercel.app/"},
+  methods:["POST","GET"],
+  credentials:true
+}));
 
 // Environment variables for secrecy
 require('dotenv').config()
