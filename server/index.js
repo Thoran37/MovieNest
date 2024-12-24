@@ -17,7 +17,7 @@ app.use(morgan("common"));
 // CORS
 const cors = require('cors')
 app.use(cors({
-  origin: [""],
+  origin: ["movienest-nine.vercel.app"],
   methods: ["POST", "GET"],
   credentials: true
 }));
