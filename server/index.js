@@ -75,9 +75,16 @@ const upload = multer({ storage: storage1 });
 
 app.get('/test-db', async (req, res) => {
   try {
-    const connection = await moviedb.command({ ping: 1 }); // Example: Check if DB connection works
-    res.status(200).json({ message: 'Database connected successfully' });
+    // Ensure `moviedb` is initialized before pinging
+    if (!moviedb) {
+      throw new Error("Database connection not initialized");
+    }
+
+    // Check the connection using the `ping` command
+    const result = await moviedb.command({ ping: 1 });
+    res.status(200).json({ message: 'Database connected successfully', result });
   } catch (error) {
+    console.error("Error in /test-db:", error);
     res.status(500).json({ message: 'Database connection failed', error: error.message });
   }
 });
