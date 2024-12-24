@@ -38,7 +38,7 @@ app.use('/assets', exp.static(path.join(__dirname, 'public/assets')));
 
 // Database connection
 let moviedb, users, admins, theatresObj, moviesObj, shows, reservations
-mongodb.connect(process.env.DB_URL)
+mongodb.connect(process.env.DB_URL, { useUnifiedTopology: true })
   .then(client => {
     moviedb = client.db('moviedb')
     users = moviedb.collection('usercollection')
