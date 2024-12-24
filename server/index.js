@@ -75,7 +75,7 @@ const upload = multer({ storage: storage1 });
 
 app.get('/test-db', async (req, res) => {
   try {
-    const connection = await database.ping(); // Example: Check if DB connection works
+    const connection = await moviedb.ping(); // Example: Check if DB connection works
     res.status(200).json({ message: 'Database connected successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Database connection failed', error: error.message });
