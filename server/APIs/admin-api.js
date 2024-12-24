@@ -121,6 +121,7 @@ adminApp.put('/update-movie', expressAsyncHandler(async (req, res) => {
 
 // Route to get all movies
 adminApp.get('/get-movies', expressAsyncHandler(async (req, res) => {
+  console.log('API Called'); // Log entry
   const movies = await movieObj.find({}).toArray(); // Fetch all movies
   res.send({ message: "Movies fetched successfully", payload: movies });
 }));
