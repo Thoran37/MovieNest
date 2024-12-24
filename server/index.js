@@ -38,7 +38,7 @@ app.use('/assets', exp.static(path.join(__dirname, 'public/assets')));
 
 // Database connection
 let moviedb, users, admins, theatresObj, moviesObj, shows, reservations
-mongodb.connect(process.env.DB_URL)
+mongodb.connect('mongodb+srv://thoran:qwertasd@moviebookingcluster.ploz5ax.mongodb.net/?retryWrites=true&w=majority&appName=MovieBookingCluster')
   .then(client => {
     moviedb = client.db('moviedb')
     users = moviedb.collection('usercollection')
