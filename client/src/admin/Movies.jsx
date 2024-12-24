@@ -16,7 +16,9 @@ function Movies() {
   let [movies, setMovies] = useState([]);
 
   async function getMovies() {
-    let res = await axios.get("http://localhost:4000/admin-api/get-movies");
+    let res = await axios.get(
+      "http://movie-nest-three.vercel.app/admin-api/get-movies"
+    );
     setMovies(res.data.payload);
   }
 
@@ -25,14 +27,16 @@ function Movies() {
   }, []);
 
   async function edit() {
-    let res = await axios.put("http://localhost:4000/admin-api/update-movie");
+    let res = await axios.put(
+      "http://movie-nest-three.vercel.app/admin-api/update-movie"
+    );
     console.log(res.data.message);
     getMovies();
   }
 
   async function deletefunc(id) {
     let res = await axios.delete(
-      `http://localhost:4000/admin-api/remove-movie/${id}`
+      `http://movie-nest-three.vercel.app/admin-api/remove-movie/${id}`
     );
     console.log(res.data.message);
     getMovies();
