@@ -38,7 +38,7 @@ app.use('/assets', exp.static(path.join(__dirname, 'public/assets')));
 
 // Database connection
 let moviedb, users, admins, theatresObj, moviesObj, shows, reservations
-mongodb.connect('mongodb+srv://thoran:qwertasd@moviebookingcluster.ploz5ax.mongodb.net/?retryWrites=true&w=majority&appName=MovieBookingCluster')
+mongodb.connect(process.env.DB_URL)
   .then(client => {
     moviedb = client.db('moviedb')
     users = moviedb.collection('usercollection')
@@ -75,7 +75,7 @@ const upload = multer({ storage: storage1 });
 
 app.get('/test-db', async (req, res) => {
   try {
-    const connection = await moviedb.ping(); // Example: Check if DB connection works
+    const connection = await moviedb.command({ ping: 1 }); // Example: Check if DB connection works
     res.status(200).json({ message: 'Database connected successfully' });
   } catch (error) {
     res.status(500).json({ message: 'Database connection failed', error: error.message });
