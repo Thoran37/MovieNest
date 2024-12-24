@@ -2,10 +2,6 @@
 const exp = require('express')
 const app = exp()
 
-app.get("/", (req, res) => {
-    res.json("Hello");
-})
-
 // Helmet for securing HTTP headers
 const helmet = require('helmet')
 app.use(helmet());
