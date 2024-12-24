@@ -21,7 +21,7 @@ app.use(morgan("common"));
 // CORS
 const cors = require('cors')
 app.use(cors({
-  origin:{"https://movie-nest-three.vercel.app/"},
+  origin:["https://movie-nest-three.vercel.app/"],
   methods:["POST","GET"],
   credentials:true
 }));
