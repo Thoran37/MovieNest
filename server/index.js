@@ -14,13 +14,21 @@ const expressAsyncHandler = require('express-async-handler')
 const morgan = require('morgan')
 app.use(morgan("common"));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://movienest-nine.vercel.app'); // Allow only your frontend
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true'); // Include cookies (if needed)
+  next();
+});
+
 // CORS
-const cors = require('cors')
-app.use(cors({
-  origin: ["https://movienest-nine.vercel.app/", "https://movie-nest-three.vercel.app/"],
-  methods: ["POST", "GET"],
-  credentials: true
-}));
+// const cors = require('cors')
+// app.use(cors({
+//   origin: ["https://movienest-nine.vercel.app/", "https://movie-nest-three.vercel.app/"],
+//   methods: ["POST", "GET"],
+//   credentials: true
+// }));
 
 // Environment variables for secrecy
 require('dotenv').config()
