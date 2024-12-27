@@ -26,7 +26,7 @@ export default function Homepage() {
   async function getMovies() {
     try {
       let res = await axios.get(
-        "http://movie-nest-three.vercel.app/admin-api/get-movies"
+        "https://movie-nest-three.vercel.app/admin-api/get-movies"
       );
       setMovies(res.data.payload);
     } catch (error) {

@@ -9,7 +9,7 @@ export default function ShowsDetails() {
   async function getMovies() {
     try {
       let res = await axios.get(
-        `http://movie-nest-three.vercel.app/admin-api/get-shows-by-theatre/${state.movieId}`
+        `https://movie-nest-three.vercel.app/admin-api/get-shows-by-theatre/${state.movieId}`
       );
       console.log(res);
       setShows(res.data.payload);

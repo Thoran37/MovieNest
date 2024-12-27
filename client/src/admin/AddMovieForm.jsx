@@ -35,7 +35,7 @@ export default function AddMovieForm() {
     // console.log(movieObj);
     // console.log(form.getAll());
     let res = await axios.post(
-      "http://movie-nest-three.vercel.app/admin-api/addMovie",
+      "https://movie-nest-three.vercel.app/admin-api/addMovie",
       movieObj
     );
     console.log(movieObj.lang);

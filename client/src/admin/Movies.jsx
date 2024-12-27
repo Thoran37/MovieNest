@@ -17,7 +17,7 @@ function Movies() {
 
   async function getMovies() {
     let res = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-movies"
+      "https://movie-nest-three.vercel.app/admin-api/get-movies"
     );
     setMovies(res.data.payload);
   }
@@ -28,7 +28,7 @@ function Movies() {
 
   async function edit() {
     let res = await axios.put(
-      "http://movie-nest-three.vercel.app/admin-api/update-movie"
+      "https://movie-nest-three.vercel.app/admin-api/update-movie"
     );
     console.log(res.data.message);
     getMovies();
@@ -36,7 +36,7 @@ function Movies() {
 
   async function deletefunc(id) {
     let res = await axios.delete(
-      `http://movie-nest-three.vercel.app/admin-api/remove-movie/${id}`
+      `https://movie-nest-three.vercel.app/admin-api/remove-movie/${id}`
     );
     console.log(res.data.message);
     getMovies();

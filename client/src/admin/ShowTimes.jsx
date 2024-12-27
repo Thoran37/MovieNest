@@ -9,7 +9,7 @@ const ShowTimes = () => {
   async function getShows() {
     const obj = { id: 1, date: "2024-08-31" };
     let res = await axios.post(
-      "http://movie-nest-three.vercel.app/admin-api/get-shows",
+      "https://movie-nest-three.vercel.app/admin-api/get-shows",
       obj
     );
     setShows(res.data.payload);

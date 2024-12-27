@@ -65,19 +65,19 @@ export default function AdminDashboard() {
 
   async function getAllArrays() {
     let res1 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-movies"
+      "https://movie-nest-three.vercel.app/admin-api/get-movies"
     );
     setMovies(res1.data.payload);
     let res2 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-shows"
+      "https://movie-nest-three.vercel.app/admin-api/get-shows"
     );
     setShows(res2.data.payload);
     let res3 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-users"
+      "https://movie-nest-three.vercel.app/admin-api/get-users"
     );
     setUsers(res3.data.payload);
     let res4 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-theatres"
+      "https://movie-nest-three.vercel.app/admin-api/get-theatres"
     );
     setTheatres(res4.data.payload);
   }

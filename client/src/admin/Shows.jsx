@@ -20,7 +20,7 @@ export default function Shows() {
 
   async function getMovies() {
     let res = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-movies"
+      "https://movie-nest-three.vercel.app/admin-api/get-movies"
     );
     setMovies(res.data.payload);
   }
