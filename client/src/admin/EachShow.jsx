@@ -44,7 +44,7 @@ export default function EachShow() {
     let _date = date.date;
     const obj = { id: movieId, date: _date };
     let res = await axios.post(
-      "http://localhost:4000/admin-api/get-shows",
+      "http://movie-nest-three.vercel.app/admin-api/get-shows",
       obj
     );
     setShows(res.data.payload);

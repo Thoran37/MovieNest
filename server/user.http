@@ -41,7 +41,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:4000/test-db
+GET http://movie-nest-three.vercel.app/admin-api/get-movies
 
 ###
 GET https://movie-nest-three.vercel.app/test-db
