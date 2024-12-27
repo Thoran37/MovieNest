@@ -69,7 +69,7 @@ export default function Homepage() {
                       </p>
                       <p className="mt-4 text-sm">{movie.desc}</p>
                       <button
-                        className="mt-6 bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-6 rounded-lg shadow-lg"
+                        className="mt-6 bg-blue-600 hover:bg-blue-700 transition duration-300 ease-in-out text-white font-bold py-2 px-6 rounded-lg shadow-lg h-100"
                         onClick={() => gotoView(movie)}
                       >
                         View Details
@@ -99,7 +99,7 @@ export default function Homepage() {
             {movies.map((movie) => (
               <Card
                 key={movie.movieId}
-                className="bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1"
+                className="bg-gray-800 text-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-1 flex flex-col justify-between"
               >
                 <CardHeader className="p-0">
                   <img
@@ -108,7 +108,7 @@ export default function Homepage() {
                     className="w-full h-48 object-cover rounded-t-lg"
                   />
                 </CardHeader>
-                <CardContent className="p-4">
+                <CardContent className="p-4 flex-grow">
                   <CardTitle className="text-xl font-bold">
                     {movie.title}
                   </CardTitle>
