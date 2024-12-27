@@ -64,21 +64,13 @@ export default function AdminDashboard() {
   // let [bookings, setBookings] = useState([]);
 
   async function getAllArrays() {
-    let res1 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-movies"
-    );
+    let res1 = await axios.get("http://localhost:4000/admin-api/get-movies");
     setMovies(res1.data.payload);
-    let res2 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-shows"
-    );
+    let res2 = await axios.get("http://localhost:4000/admin-api/get-shows");
     setShows(res2.data.payload);
-    let res3 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-users"
-    );
+    let res3 = await axios.get("http://localhost:4000/admin-api/get-users");
     setUsers(res3.data.payload);
-    let res4 = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-theatres"
-    );
+    let res4 = await axios.get("http://localhost:4000/admin-api/get-theatres");
     setTheatres(res4.data.payload);
   }
 

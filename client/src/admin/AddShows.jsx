@@ -24,9 +24,7 @@ export default function AddShows() {
   let [theatres, setTheatres] = useState([]);
 
   async function getTheatres() {
-    let res = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-theatres"
-    );
+    let res = await axios.get("http://localhost:4000/admin-api/get-theatres");
     if (res.data.message !== "Theatres fetched successfully")
       setErr(res.data.message);
     else setTheatres(res.data.payload);
@@ -42,7 +40,7 @@ export default function AddShows() {
     obj.blockedSeats = [];
     console.log(obj);
     // let res = await axios.post(
-    //   "http://movie-nest-three.vercel.app/admin-api/add-shows",
+    //   "http://localhost:4000/admin-api/add-shows",
     //   obj
     // );
   }

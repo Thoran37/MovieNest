@@ -19,9 +19,7 @@ export default function Shows() {
   let navigate = useNavigate();
 
   async function getMovies() {
-    let res = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-movies"
-    );
+    let res = await axios.get("http://localhost:4000/admin-api/get-movies");
     setMovies(res.data.payload);
   }
 

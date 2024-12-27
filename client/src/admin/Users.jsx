@@ -13,9 +13,7 @@ function Users() {
   let [users, setUsers] = useState([]);
 
   async function getUsers() {
-    let res = await axios.get(
-      "http://movie-nest-three.vercel.app/admin-api/get-users"
-    );
+    let res = await axios.get("http://localhost:4000/admin-api/get-users");
     setUsers(res.data.payload);
   }
 

@@ -15,7 +15,7 @@ export default function AddTheatre() {
   async function addTheatre(theatreObj) {
     theatreObj.theatreId = Date.now();
     let res = await axios.post(
-      "http://movie-nest-three.vercel.app/admin-api/add-theatre",
+      "http://localhost:4000/admin-api/add-theatre",
       theatreObj
     );
     if (

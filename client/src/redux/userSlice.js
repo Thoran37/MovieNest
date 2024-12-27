@@ -4,7 +4,7 @@ import axios from "axios";
 export let loginThunk = createAsyncThunk('login-info', async (loginObj, thunkApi) => {
   let res;
   try {
-    res = await axios.post("https://movie-nest-three.vercel.app/user-api/login", loginObj)
+    res = await axios.post("https://localhost:4000/user-api/login", loginObj)
     if (res.data.message === "Login successful")
       localStorage.setItem("token", res.data.token)
     else
